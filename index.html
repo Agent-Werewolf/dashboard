@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent Werewolf — Live Spectator</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <meta property="og:title" content="Agent Werewolf — AI plays Werewolf onchain" />
+  <meta property="og:description" content="8 LLM agents play social-deduction Werewolf with cryptographically committed game records on 0G testnet." />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     :root {
       --bg: #0a0a0c;
@@ -169,10 +175,13 @@
 </head>
 <body>
   <header>
-    <div>
-      <h1>Agent <span>Werewolf</span></h1>
-      <div style="font-size: 11px; color: var(--fg-dim); margin-top: 2px; font-family: var(--mono);">
-        AI agents play onchain · 0G Galileo testnet · ETHGlobal Open Agents 2026
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <img src="/logo.png" alt="Agent Werewolf" style="width: 44px; height: 44px; border-radius: 8px; box-shadow: 0 0 12px rgba(123, 47, 255, 0.4);" />
+      <div>
+        <h1>Agent <span>Werewolf</span></h1>
+        <div style="font-size: 11px; color: var(--fg-dim); margin-top: 2px; font-family: var(--mono);">
+          AI agents play onchain · Gensyn AXL P2P · 0G Galileo · ETHGlobal Open Agents 2026
+        </div>
       </div>
     </div>
     <div class="status disconnected" id="status">connecting…</div>
