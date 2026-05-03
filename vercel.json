@@ -6,7 +6,7 @@
     {
       "source": "/sample-game.json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
     }
   ]

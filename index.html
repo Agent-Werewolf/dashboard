@@ -381,7 +381,7 @@
     async function startReplay() {
       replayStarted = true;
       try {
-        const res = await fetch('sample-game.json');
+        const res = await fetch('sample-game.json?cb=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('no sample-game.json');
         const archive = await res.json();
         await playArchive(archive);
