@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Convert SVG → PNG (Agent Werewolf demo assets)</title>
+<style>
+  body { font: 14px/1.5 system-ui; background: #0a0a0c; color: #e6e6ec; padding: 40px; max-width: 1100px; margin: 0 auto; }
+  h1 { color: #ff6b3d; margin-bottom: 8px; }
+  p { color: #8b8b95; margin-bottom: 32px; }
+  .card { background: #14141a; border: 1px solid #26262e; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .card h2 { color: #00f5ff; margin-bottom: 12px; font-size: 18px; }
+  .card p { color: #8b8b95; margin: 8px 0 16px; }
+  button { background: #ff6b3d; color: #0a0a0c; border: 0; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; }
+  button:hover { background: #ff8a5d; }
+  .preview { border: 1px solid #26262e; border-radius: 8px; margin-top: 16px; overflow: hidden; max-width: 100%; }
+  .preview img, .preview svg { display: block; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<h1>Convert SVG → PNG</h1>
+<p>This page renders each demo asset SVG and lets you download as 1920×1080 PNG. Use the PNGs in your video editor.</p>
+
+<div class="card">
+  <h2>1. Architecture Diagram</h2>
+  <p>Use this at 0:15–0:40 (architecture beat). Hold for 5 s, then zoom into each box.</p>
+  <button onclick="convert('architecture-diagram.svg', 'architecture-diagram.png')">Download PNG (1920×1080)</button>
+  <div class="preview"><object data="architecture-diagram.svg" type="image/svg+xml"></object></div>
+</div>
+
+<div class="card">
+  <h2>2. End Card</h2>
+  <p>Use this at 2:55–3:00 (end card). Hold for 5 s before fade to black.</p>
+  <button onclick="convert('end-card.svg', 'end-card.png')">Download PNG (1920×1080)</button>
+  <div class="preview"><object data="end-card.svg" type="image/svg+xml"></object></div>
+</div>
+
+<script>
+async function convert(svgPath, outName) {
+  const res = await fetch(svgPath);
+  const svgText = await res.text();
+  const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  await new Promise((resolve, reject) => {
+    img.onload = resolve;
+    img.onerror = reject;
+    img.src = url;
+  });
+  const canvas = document.createElement('canvas');
+  canvas.width = 1920;
+  canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#0a0a0c';
+  ctx.fillRect(0, 0, 1920, 1080);
+  ctx.drawImage(img, 0, 0, 1920, 1080);
+  URL.revokeObjectURL(url);
+  canvas.toBlob((blob) => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = outName;
+    a.click();
+  }, 'image/png');
+}
+</script>
+</body>
+</html>

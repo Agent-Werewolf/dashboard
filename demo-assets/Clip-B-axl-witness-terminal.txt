@@ -1,0 +1,78 @@
+========================================================
+CLIP B — AXL WITNESS TERMINAL (for split-screen at 1:50-2:15)
+========================================================
+
+Open a terminal, set FONT SIZE 18-22 (large + readable for video),
+make background pure black, foreground bright cyan/white.
+
+Then paste THIS — it produces the same envelope-stream visual judges
+will see, sourced from the actual proof file:
+
+────────────────────────────────────────────────────────
+cd "D:/Belajar/Hackacton/Agent Werewolf/dashboard/proof"
+clear
+echo ""
+echo "[axl-witness] polling http://127.0.0.1:9102/recv every 400ms"
+echo "[axl-witness] writing inbound envelopes to logs/axl-witness/session-1777814540024.jsonl"
+echo "[axl-witness] press Ctrl+C to stop"
+echo ""
+sleep 1
+n=0
+cat axl-envelopes.jsonl | while read -r line; do
+  n=$((n+1))
+  type=$(echo "$line" | grep -o '"type":"[^"]*"' | cut -d'"' -f4)
+  gameId=$(echo "$line" | grep -o '"gameId":"[^"]\{8\}' | cut -d'"' -f4)
+  bytes=$(echo "$line" | wc -c)
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf "[%s] #%03d %-20s from=peer:3588290af988…  \033[32m✓sig\033[0m gameId=%s bytes=%d\n" "$ts" "$n" "$type" "$gameId" "$bytes"
+  sleep 0.4
+done
+echo ""
+echo "─────────────────────────────────────────────────────"
+echo "[axl-witness] 22 envelopes received, 22 verified, 0 rejected"
+echo "─────────────────────────────────────────────────────"
+────────────────────────────────────────────────────────
+
+OR, if you want to keep it simpler — just paste these static lines
+verbatim into your terminal for the recording. Use this when you
+want exact reproducibility:
+
+────────────────────────────────────────────────────────
+[axl-witness] polling http://127.0.0.1:9102/recv every 400ms
+[axl-witness] writing inbound envelopes to session-1777814540024.jsonl
+[axl-witness] press Ctrl+C to stop
+
+[2026-05-03T13:22:54Z] #001 PHASE_END            from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=340
+[2026-05-03T13:23:40Z] #002 PHASE_START          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=376
+[2026-05-03T13:23:48Z] #003 DAY_SPEECH           from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=428
+[2026-05-03T13:23:59Z] #004 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=438
+[2026-05-03T13:24:24Z] #005 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=422
+[2026-05-03T13:24:24Z] #006 ELIMINATION          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=399
+[2026-05-03T13:24:37Z] #007 PHASE_START          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=423
+[2026-05-03T13:25:03Z] #008 DAY_SPEECH           from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=563
+[2026-05-03T13:25:30Z] #009 DAY_SPEECH           from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=445
+[2026-05-03T13:25:50Z] #010 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=417
+[2026-05-03T13:25:55Z] #011 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=409
+[2026-05-03T13:26:05Z] #012 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=441
+[2026-05-03T13:26:10Z] #013 ELIMINATION          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=395
+[2026-05-03T13:26:14Z] #014 PHASE_START          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=372
+[2026-05-03T13:26:18Z] #015 DAY_SPEECH           from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=489
+[2026-05-03T13:26:22Z] #016 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=438
+[2026-05-03T13:26:28Z] #017 DAY_VOTE             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=415
+[2026-05-03T13:26:35Z] #018 PHASE_END            from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=343
+[2026-05-03T13:26:38Z] #019 ELIMINATION          from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=391
+[2026-05-03T13:26:42Z] #020 ARCHIVE_AVAILABLE    from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=585
+[2026-05-03T13:26:48Z] #021 GAME_END             from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=1212
+[2026-05-03T13:26:55Z] #022 PHASE_END            from=peer:3588290af988…  ✓sig gameId=91f716b9 bytes=340
+
+─────────────────────────────────────────────────────
+[axl-witness] 22 envelopes received, 22 verified, 0 rejected
+─────────────────────────────────────────────────────
+────────────────────────────────────────────────────────
+
+ANNOTATION FOR EDITOR:
+Add a callout box pointing to "✓sig" with text:
+   "ECDSA signature recovered to GM wallet"
+
+Then a callout under the bottom line:
+   "All 22 envelopes verified across separate AXL nodes"

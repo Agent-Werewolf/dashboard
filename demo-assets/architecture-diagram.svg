@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="100%" stop-color="#14141a"/>
+    </linearGradient>
+    <linearGradient id="cyanGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00f5ff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="violetGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7b2fff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#7b2fff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="orangeGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6b3d" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ff6b3d" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7b2fff"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="960" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="44" font-weight="700" fill="#e6e6ec">AGENT WEREWOLF</text>
+  <text x="960" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="18" fill="#8b8b95">Decentralized AI Social Deduction · ETHGlobal Open Agents 2026</text>
+
+  <!-- Center: GameMaster + 8 Agents -->
+  <g>
+    <rect x="760" y="180" width="400" height="180" rx="16" fill="url(#orangeGlow)" stroke="#ff6b3d" stroke-width="2" filter="url(#glow)"/>
+    <text x="960" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#e6e6ec">GAMEMASTER</text>
+    <text x="960" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#ff6b3d">8 LLM Agents · 5 Personas + 3 Variants</text>
+    <text x="960" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Paranoid · Manipulator · Analyst</text>
+    <text x="960" y="298" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Accuser · Peacemaker</text>
+    <text x="960" y="334" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#ff6b3d">Phase: NIGHT → DAY → VOTE → REVEAL</text>
+  </g>
+
+  <!-- Four service boxes below -->
+
+  <!-- 0G Compute -->
+  <g>
+    <rect x="120" y="500" width="380" height="240" rx="16" fill="url(#cyanGlow)" stroke="#00f5ff" stroke-width="2" filter="url(#glow)"/>
+    <text x="310" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#00f5ff">0G COMPUTE</text>
+    <text x="310" y="575" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#e6e6ec">Sealed Inference (TEE)</text>
+    <text x="310" y="615" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">qwen-2.5-7b-instruct</text>
+    <text x="310" y="640" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Verified LLM speeches</text>
+    <text x="310" y="665" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">+ vote reasoning</text>
+    <text x="310" y="708" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#5b9bff">~6.5 s rate-limited</text>
+  </g>
+
+  <!-- Gensyn AXL -->
+  <g>
+    <rect x="540" y="500" width="380" height="240" rx="16" fill="url(#violetGlow)" stroke="#7b2fff" stroke-width="2" filter="url(#glow)"/>
+    <text x="730" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#7b2fff">GENSYN AXL</text>
+    <text x="730" y="575" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#e6e6ec">P2P Mesh (Yggdrasil/TLS)</text>
+    <text x="730" y="615" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">2 nodes peered, signed</text>
+    <text x="730" y="640" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">envelopes mirror across</text>
+    <text x="730" y="665" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">witness verifies ECDSA</text>
+    <text x="730" y="708" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#b86bff">22+ envelopes / game</text>
+  </g>
+
+  <!-- 0G Chain -->
+  <g>
+    <rect x="960" y="500" width="380" height="240" rx="16" fill="url(#orangeGlow)" stroke="#ff6b3d" stroke-width="2" filter="url(#glow)"/>
+    <text x="1150" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#ff6b3d">0G CHAIN</text>
+    <text x="1150" y="575" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#e6e6ec">Galileo Testnet (16602)</text>
+    <text x="1150" y="615" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">AgentRegistry · ERC-8004</text>
+    <text x="1150" y="640" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">ReputationOracle</text>
+    <text x="1150" y="665" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">GameArchive · Merkle root</text>
+    <text x="1150" y="708" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#ffa07a">3 contracts deployed</text>
+  </g>
+
+  <!-- 0G Storage -->
+  <g>
+    <rect x="1380" y="500" width="380" height="240" rx="16" fill="url(#cyanGlow)" stroke="#00f5ff" stroke-width="2" filter="url(#glow)"/>
+    <text x="1570" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#00f5ff">0G STORAGE</text>
+    <text x="1570" y="575" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#e6e6ec">Decentralized archive</text>
+    <text x="1570" y="615" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Full game JSON upload</text>
+    <text x="1570" y="640" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Storage root onchain</text>
+    <text x="1570" y="665" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#8b8b95">Anyone can verify</text>
+    <text x="1570" y="708" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#5b9bff">Merkle-rooted JSON</text>
+  </g>
+
+  <!-- Lines from gamemaster to each service -->
+  <g stroke="#7b2fff" stroke-width="2" fill="none" opacity="0.7">
+    <path d="M 860 360 Q 600 430 310 500" marker-end="url(#arrow)"/>
+    <path d="M 920 360 Q 800 430 730 500" marker-end="url(#arrow)"/>
+    <path d="M 1000 360 Q 1080 430 1150 500" marker-end="url(#arrow)"/>
+    <path d="M 1060 360 Q 1300 430 1570 500" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Bottom line: outcome -->
+  <g>
+    <rect x="540" y="840" width="840" height="120" rx="16" fill="#14141a" stroke="#26262e" stroke-width="2"/>
+    <text x="960" y="885" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#e6e6ec">VERIFIABLE GAME OUTCOME</text>
+    <text x="960" y="918" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#8b8b95">Every speech · vote · elimination → Merkle tree → onchain commit</text>
+    <text x="960" y="942" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#ff6b3d">No central server can rewrite history</text>
+  </g>
+
+  <!-- URL bottom -->
+  <text x="960" y="1020" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" fill="#8b8b95">github.com/Agent-Werewolf · agent-werewolf.vercel.app</text>
+</svg>

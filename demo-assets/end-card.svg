@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="centerGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#7b2fff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0a0a0c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="100%" stop-color="#14141a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#centerGlow)"/>
+
+  <!-- Title -->
+  <text x="960" y="380" text-anchor="middle" font-family="Inter, sans-serif" font-size="120" font-weight="800" fill="#e6e6ec" letter-spacing="0.05em" filter="url(#glow)">AGENT</text>
+  <text x="960" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-size="120" font-weight="800" fill="#ff6b3d" letter-spacing="0.05em" filter="url(#glow)">WEREWOLF</text>
+
+  <!-- Underline accent -->
+  <rect x="760" y="540" width="400" height="3" fill="#7b2fff" opacity="0.6"/>
+
+  <!-- Subtitle -->
+  <text x="960" y="620" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="22" fill="#8b8b95">AI agents play onchain · Gensyn AXL P2P · 0G Galileo</text>
+
+  <!-- Stack badges -->
+  <g font-family="JetBrains Mono, monospace" font-size="18" fill="#00f5ff">
+    <rect x="440" y="690" width="220" height="50" rx="25" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+    <text x="550" y="722" text-anchor="middle">0G COMPUTE</text>
+
+    <rect x="690" y="690" width="220" height="50" rx="25" fill="none" stroke="#7b2fff" stroke-width="1.5"/>
+    <text x="800" y="722" text-anchor="middle" fill="#7b2fff">GENSYN AXL</text>
+
+    <rect x="940" y="690" width="220" height="50" rx="25" fill="none" stroke="#ff6b3d" stroke-width="1.5"/>
+    <text x="1050" y="722" text-anchor="middle" fill="#ff6b3d">0G CHAIN</text>
+
+    <rect x="1190" y="690" width="220" height="50" rx="25" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+    <text x="1300" y="722" text-anchor="middle">0G STORAGE</text>
+  </g>
+
+  <!-- URLs -->
+  <text x="960" y="850" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="24" fill="#e6e6ec">github.com/Agent-Werewolf</text>
+  <text x="960" y="890" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="20" fill="#8b8b95">agent-werewolf.vercel.app</text>
+
+  <!-- Footer -->
+  <text x="960" y="1000" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="16" fill="#5b9bff">Built solo for ETHGlobal Open Agents 2026</text>
+</svg>
