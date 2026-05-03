@@ -1,73 +1,73 @@
 {
   "v": 1,
-  "gameId": "1f189edc-bfe6-4324-be18-a8b45432fef4",
-  "startTs": 1777795745746,
-  "endTs": 1777795969836,
-  "winner": "VILLAGERS",
+  "gameId": "91f716b9-ddb0-4326-a65b-9cf55363c810",
+  "startTs": 1777814564499,
+  "endTs": 1777814795107,
+  "winner": "WOLVES",
   "players": [
     {
       "agentId": 1,
-      "walletAddress": "0x028B46d5382F4fD2322F5F3Ed830EfdAb0C08A9F",
-      "axlPeerId": "0xf6330a8d0d14428070ee63ad81dbc768b075aeb83434ccb8d0367fc9a35d065c",
+      "walletAddress": "0x5dF374cA9EBF5085FB8f737a7ff5FF2053F0Fb1A",
+      "axlPeerId": "0xb0432bd429089efd3e1967580c8668c53c2ab28bfbcd68d773392f2aa3faa933",
       "displayName": "The Suspicious Paranoid",
       "finalRole": "VILLAGER",
-      "survived": true
+      "survived": false
     },
     {
       "agentId": 2,
-      "walletAddress": "0x44691d74816134185ba370BcDEb8751BA44Da92B",
-      "axlPeerId": "0xa87683abcd52ceb34478949c168b9a55fd901b995d8965b7e63244668447e73d",
+      "walletAddress": "0xE10CA4C556897e718f54FAbFF9fd2BBEC17F3E4e",
+      "axlPeerId": "0xda0f0f5f9e556a0b8490802fdb9c1357b0ca2848a0223b7898a7b2f7e16c8d6d",
       "displayName": "The Charming Manipulator",
       "finalRole": "VILLAGER",
       "survived": false
     },
     {
       "agentId": 3,
-      "walletAddress": "0x99b795F85fe9a393fD05d8C0c17A845afB0BaB09",
-      "axlPeerId": "0x38262f8293991635c0dbe4a32185726382acd9aed469c52879505c2e1d68a189",
+      "walletAddress": "0xbf008469bB743e41e2906856e3FE03cF18F0F344",
+      "axlPeerId": "0x29985968eb4946d6951565bdf0ac760f9e4455ce8dd3eda8a958ad35576bc0eb",
       "displayName": "The Quiet Analyst",
-      "finalRole": "VILLAGER",
-      "survived": false
-    },
-    {
-      "agentId": 4,
-      "walletAddress": "0x857be25f2d86d9b53e124995B299a1C02DC5Fd6A",
-      "axlPeerId": "0x5a2436cd0857e2b53b947e4e8d0b8eee4a3c04c824ea209da8ea0ce3289480db",
-      "displayName": "The Loud Accuser",
-      "finalRole": "WEREWOLF",
-      "survived": false
-    },
-    {
-      "agentId": 5,
-      "walletAddress": "0xFC10D7B745f5fa57F7C8B89A3E92c2f7274af0F1",
-      "axlPeerId": "0x36ce1b8617f6e7d2d1b329d4eb4d4f620253ce3fc51627241f1060171f5824e9",
-      "displayName": "The Peacemaker",
-      "finalRole": "VILLAGER",
-      "survived": false
-    },
-    {
-      "agentId": 6,
-      "walletAddress": "0xccCC8279a25a84Af57d3B1337971614B00EccFc5",
-      "axlPeerId": "0xff433f03c938faa2da2110983170429ce667d896a4533a3fa50b3da7b0f9e99b",
-      "displayName": "Paranoid Shadow",
       "finalRole": "SEER",
       "survived": false
     },
     {
-      "agentId": 7,
-      "walletAddress": "0x8850E4622d938A5c329674743cB97362A7E815F0",
-      "axlPeerId": "0x685296963cfc7fcf0263c5d3e3147013e4298af565b1e7010175c67108687444",
-      "displayName": "Manipulator Shadow",
+      "agentId": 4,
+      "walletAddress": "0x10640306b3ac5b3fAeE0484396B8eCEf7FE736E0",
+      "axlPeerId": "0x8da2799ac38284766d076a80c752ac730cd5028e95e55c835d1980ffb674bb97",
+      "displayName": "The Loud Accuser",
+      "finalRole": "VILLAGER",
+      "survived": false
+    },
+    {
+      "agentId": 5,
+      "walletAddress": "0xb5e6901D47D5547DB06aB734bB4481e38109075E",
+      "axlPeerId": "0x3be2b70ba08d417705abc538207aee5f47b5eb7b1e7a91c0473272bf6154a914",
+      "displayName": "The Peacemaker",
+      "finalRole": "WEREWOLF",
+      "survived": true
+    },
+    {
+      "agentId": 6,
+      "walletAddress": "0x75CF2f544a1d26486695888e0E4e99D20c38eDdf",
+      "axlPeerId": "0xbcea0e1f29a77902763e8add033bffa0e628530a60efcdd6ca0e8d43b03bf9c5",
+      "displayName": "Paranoid Shadow",
       "finalRole": "WEREWOLF",
       "survived": false
     },
     {
+      "agentId": 7,
+      "walletAddress": "0x6366b35DCd0d585E6c09c1101FE15FC8D6418568",
+      "axlPeerId": "0x86379714b84a9f8a760f9be35262074b786fc7d5fe62b434cbd02448b2ade837",
+      "displayName": "Manipulator Shadow",
+      "finalRole": "VILLAGER",
+      "survived": false
+    },
+    {
       "agentId": 8,
-      "walletAddress": "0xc5F387C22699dF46a8b6CBeAe46167faEdD55A8c",
-      "axlPeerId": "0xeb2f48458181f27a8ca675ac216425fb03334202a72eb215751720b586d8492b",
+      "walletAddress": "0x320E25f3bCe05Dc6E4a976247ed7932e79B7d2FB",
+      "axlPeerId": "0x905f8473c4ed2911b63ea882c966da2483d6d6a88c416754f8550fde16db02c7",
       "displayName": "The Suspicious Paranoid",
       "finalRole": "VILLAGER",
-      "survived": true
+      "survived": false
     }
   ],
   "turns": [
@@ -75,13 +75,13 @@
       "turn": 1,
       "night": {
         "kill": {
-          "wolfId": 4,
-          "targetId": 5,
-          "reasoning": "The Peacemaker spreads chaos! Without him, order prevails!"
+          "wolfId": 5,
+          "targetId": 7,
+          "reasoning": "I'm not sure but... if there's a threat, better safe than sorry."
         },
         "investigation": {
-          "seerId": 6,
-          "targetId": 7,
+          "seerId": 3,
+          "targetId": 5,
           "discoveredRole": "WEREWOLF"
         },
         "covenMessages": []
@@ -89,45 +89,45 @@
       "day": {
         "speeches": [
           {
-            "speakerId": 8,
-            "text": "The Charming Manipulator and The Quiet Analyst both seemed too eager to eliminate agent 5 yesterday. Convenient, isn't it? Doesn't add up.",
-            "ts": 1777795762975,
-            "turn": 1
-          },
-          {
-            "speakerId": 2,
-            "text": "Let's gather our thoughts together, folks. Agent 5 was eliminated, but we must remain vigilant. Perhaps sharing some insights could help us uncover tonight's threat more swiftly.",
-            "ts": 1777795768397,
-            "turn": 1
-          },
-          {
-            "speakerId": 4,
-            "text": "The Charming Manipulator and The Quiet Analyst must be hiding something! Why else would you two keep avoiding eye contact? Nightfall comes too soon... *glares at agents 2 and 3*",
-            "ts": 1777795773867,
+            "speakerId": 3,
+            "text": "Agent 5's elimination as a Villager makes their Werewolf status more likely. We need to investigate further tonight.",
+            "ts": 1777814581169,
             "turn": 1
           },
           {
             "speakerId": 6,
-            "text": "Agent 7's elimination as a werewolf aligns with The Charming Manipulator's behavior; they've been too conveniently silent lately. Coincidences become conspiracies here. Let's watch them closely tonight.",
-            "ts": 1777795782283,
+            "text": "Agent 7's elimination was too convenient. The Peacemaker's sudden change in alliance now seems like part of a larger pattern within patterns. Something feels off about their silence and newfound peace.",
+            "ts": 1777814587586,
             "turn": 1
           },
           {
-            "speakerId": 3,
-            "text": "Agent 1 and Agent 4, consider the timing of Agent 5's elimination. It could be coincidental, but let's not overlook patterns in accusations.",
-            "ts": 1777795787925,
+            "speakerId": 5,
+            "text": "Perhaps we should wait a bit longer before jumping to conclusions. Let's gather more information tonight and see where that leads us. Safety in numbers, after all.",
+            "ts": 1777814592718,
             "turn": 1
           },
           {
-            "speakerId": 7,
-            "text": "Hm, interesting... Agent 6 seems overlooked. Let's give them a chance, huh? Maybe they know something we missed.",
-            "ts": 1777795794606,
+            "speakerId": 8,
+            "text": "Agent 2, why did you suddenly stop talking? It's suspicious, especially after last night's events. Agents 1 and 6, what do you make of his abrupt silence?",
+            "ts": 1777814601403,
+            "turn": 1
+          },
+          {
+            "speakerId": 2,
+            "text": "We need to work together tonight, players. Let's gather more information before jumping to conclusions. Safety in numbers, after all.",
+            "ts": 1777814606697,
+            "turn": 1
+          },
+          {
+            "speakerId": 4,
+            "text": "Agent 2, your charm is intoxicating, but I see through it! Your guilt is palpable; stop lying and confess before night falls!",
+            "ts": 1777814614715,
             "turn": 1
           },
           {
             "speakerId": 1,
-            "text": "Agent 2, your charisma is suspiciously convenient now that agent 5 is gone. And agent 3, your silence is starting to feel hollow. Something's off here.",
-            "ts": 1777795802059,
+            "text": "Why is The Charming Manipulator so eager to prove his innocence? Something doesn't add up here.",
+            "ts": 1777814619721,
             "turn": 1
           }
         ],
@@ -135,102 +135,102 @@
         "votes": [
           {
             "voterId": 1,
-            "targetId": 6,
-            "reasoning": "Paranoid Shadow's alibis are too convenient.",
-            "ts": 1777795806636,
+            "targetId": 4,
+            "reasoning": "Too loud and obvious, doesn't add up.",
+            "ts": 1777814625196,
             "turn": 1
           },
           {
             "voterId": 2,
-            "targetId": 8,
-            "reasoning": "The Suspicious Paranoid seems to jump to conclusions too quickly.",
-            "ts": 1777795813659,
+            "targetId": 1,
+            "reasoning": "The Loud Accuser tends to jump to conclusions, better to remove them first.",
+            "ts": 1777814632699,
             "turn": 1
           },
           {
             "voterId": 3,
-            "targetId": 7,
-            "reasoning": "Manipulator Shadow has shown suspicious behavior.",
-            "ts": 1777795820824,
+            "targetId": 6,
+            "reasoning": "Paranoid Shadow's erratic behavior suggests instability.",
+            "ts": 1777814639629,
             "turn": 1
           },
           {
             "voterId": 4,
-            "targetId": 7,
-            "reasoning": "Manipulator Shadow must be one of them!",
-            "ts": 1777795825871,
+            "targetId": 2,
+            "reasoning": "He's too charming to be a villager!",
+            "ts": 1777814644663,
+            "turn": 1
+          },
+          {
+            "voterId": 5,
+            "targetId": 3,
+            "reasoning": "The Quiet Analyst seems cautious, perhaps too much so.",
+            "ts": 1777814652129,
             "turn": 1
           },
           {
             "voterId": 6,
-            "targetId": 7,
-            "reasoning": "The Manipulator Shadow's behavior aligns too conveniently with recent events.",
-            "ts": 1777795833149,
-            "turn": 1
-          },
-          {
-            "voterId": 7,
             "targetId": 2,
-            "reasoning": "They underestimate the group's dynamics.",
-            "ts": 1777795840149,
+            "reasoning": "Charming Manipulator always too convenient.",
+            "ts": 1777814659044,
             "turn": 1
           },
           {
             "voterId": 8,
-            "targetId": 2,
-            "reasoning": "Too charming, too convenient.",
-            "ts": 1777795845281,
+            "targetId": 4,
+            "reasoning": "Too loud and aggressive, doesn't add up.",
+            "ts": 1777814664447,
             "turn": 1
           }
         ],
-        "eliminated": 7
+        "eliminated": 4
       }
     },
     {
       "turn": 2,
       "night": {
         "kill": {
-          "wolfId": 4,
-          "targetId": 6,
-          "reasoning": "Because I saw you whispering with the Villager at sunset! You're hiding something sinister!"
+          "wolfId": 5,
+          "targetId": 3,
+          "reasoning": "I'm not sure but... if they're gathering info against us, silence might be the best option."
         },
         "investigation": {
-          "seerId": 6,
-          "targetId": 2,
-          "discoveredRole": "VILLAGER"
+          "seerId": 3,
+          "targetId": 6,
+          "discoveredRole": "WEREWOLF"
         },
         "covenMessages": []
       },
       "day": {
         "speeches": [
           {
-            "speakerId": 2,
-            "text": "Let's not jump to conclusions, everyone. Agent 7's elimination might have affected both of us. We should focus on gathering information together before making any accusations. Trust in our process, let's uncover the truth together.",
-            "ts": 1777795865321,
+            "speakerId": 6,
+            "text": "Agent 8's enthusiasm for The Charming Manipulator's innocence is... too convenient. Coincidences like this align with the Peacemaker's sudden shift. We must be vigilant; there's a wolf among us hiding behind civility.",
+            "ts": 1777814685125,
             "turn": 2
           },
           {
             "speakerId": 1,
-            "text": "Agent 2, your silence has always been convenient. And agent 3, why do you suddenly need so much time to analyze? Too many coincidences for my liking.",
-            "ts": 1777795872412,
+            "text": "Agent 2's silence and Agent 4's overeagerness both suspicious. Agent 2, your sudden quiet could be masking something. Agent 4, too quick to accuse—does it hide fear of the truth? Both don't add up.",
+            "ts": 1777814690958,
             "turn": 2
           },
           {
-            "speakerId": 4,
-            "text": "Ah, Agent 2, your charm was on full display yesterday! And you, Agent 3, why the sudden silence? Too convenient, don't you think? Night comes, and who will howl? *fixes a glare on Agents 2 and 3*",
-            "ts": 1777795879676,
-            "turn": 2
-          },
-          {
-            "speakerId": 3,
-            "text": "Agent 1, your paranoia is commendable but let's focus on facts. Agent 3's silence and Agent 2's eagerness both had 5 eliminated. Patterns exist, but we need more before jumping to conclusions.",
-            "ts": 1777795884639,
+            "speakerId": 2,
+            "text": "Let's be cautious, everyone. The Peacemaker's sudden shift could be genuine, or it might hide something. We should discuss strategies for questioning and gathering evidence tonight. Safety in numbers, remember.",
+            "ts": 1777814699490,
             "turn": 2
           },
           {
             "speakerId": 8,
-            "text": "Agent 2, your timing's too perfect. Agent 3, stop being so evasive—it's getting old. Someone's hiding more than just the truth.",
-            "ts": 1777795891860,
+            "text": "Agent 4, your accusations are premature. Everyone's motives are suspect, not just Agent 2. And The Charming Manipulator, your enthusiasm for self-proclamation is... peculiar. What are you hiding?",
+            "ts": 1777814703411,
+            "turn": 2
+          },
+          {
+            "speakerId": 5,
+            "text": "Let's take a moment to calm down, everyone. Perhaps The Charming Manipulator's eagerness stems from a desire to understand more. Agreed, we should wait and see what tonight brings before making any rushed decisions.",
+            "ts": 1777814712006,
             "turn": 2
           }
         ],
@@ -239,49 +239,49 @@
           {
             "voterId": 1,
             "targetId": 2,
-            "reasoning": "Too convenient, doesn't add up.",
-            "ts": 1777795897384,
+            "reasoning": "Too eager to prove innocence, doesn't add up.",
+            "ts": 1777814716510,
             "turn": 2
           },
           {
             "voterId": 2,
-            "targetId": 4,
-            "reasoning": "The Loud Accuser tends to jump to conclusions quickly, and that's not always wise.",
-            "ts": 1777795906010,
+            "targetId": 6,
+            "reasoning": "Paranoid Shadow's behavior shifts too dramatically; it's wise to be cautious.",
+            "ts": 1777814725093,
             "turn": 2
           },
           {
-            "voterId": 3,
-            "targetId": 2,
-            "reasoning": "The Charming Manipulator's strategy seems too aligned with others to be purely coincidental.",
-            "ts": 1777795911268,
+            "voterId": 5,
+            "targetId": 6,
+            "reasoning": "(LLM output malformed; defaulted)",
+            "ts": 1777814729496,
             "turn": 2
           },
           {
-            "voterId": 4,
+            "voterId": 6,
             "targetId": 2,
-            "reasoning": "Agent 2's charisma was on full display protecting The Quiet Analyst. Too convenient!",
-            "ts": 1777795918916,
+            "reasoning": "Agent 2's sudden silence aligns with The Peacemaker's shift in behavior, a pattern within patterns.",
+            "ts": 1777814737891,
             "turn": 2
           },
           {
             "voterId": 8,
-            "targetId": 2,
-            "reasoning": "Agent 2's behavior has been too convenient since agent 6's elimination.",
-            "ts": 1777795923499,
+            "targetId": 6,
+            "reasoning": "(LLM output malformed; defaulted)",
+            "ts": 1777814742439,
             "turn": 2
           }
         ],
-        "eliminated": 2
+        "eliminated": 6
       }
     },
     {
       "turn": 3,
       "night": {
         "kill": {
-          "wolfId": 4,
-          "targetId": 3,
-          "reasoning": "The Quiet Analyst witnessed my plans last night! He must be silenced!"
+          "wolfId": 5,
+          "targetId": 1,
+          "reasoning": "I'm not sure but perhaps they have secrets best left undiscovered for now."
         },
         "investigation": null,
         "covenMessages": []
@@ -289,44 +289,69 @@
       "day": {
         "speeches": [
           {
-            "speakerId": 1,
-            "text": "Agent 2, your convenience is wearing thin. Agent 3, stop dodging—every evasion adds to suspicion. Who benefits from Agent 3's silence and Agent 2's showmanship?",
-            "ts": 1777795936651,
-            "turn": 3
-          },
-          {
             "speakerId": 8,
-            "text": "Agent 2, your behavior is too aligned with Agent 5's elimination. Agent 3, stop dodging—your silence is wearing thin. Someone's got secrets.",
-            "ts": 1777795944103,
+            "text": "Agent 2, your silence is convenient. Agent 4, stop jumping to conclusions. We need facts, not fears and false bravado.",
+            "ts": 1777814756830,
             "turn": 3
           },
           {
-            "speakerId": 4,
-            "text": "Agent 8, your insinuations are wearing thin! Agent 2, your smiles seem too timed, like clockwork! Night falls, and the howl of deceit grows louder!",
-            "ts": 1777795949641,
+            "speakerId": 5,
+            "text": "Let's ensure our discussions remain constructive, agents. A calm approach will serve us best as we navigate tonight's revelations. Safety in numbers, indeed.",
+            "ts": 1777814761969,
+            "turn": 3
+          },
+          {
+            "speakerId": 2,
+            "text": "Let's focus on unity and caution, friends. The Peacemaker has a point—we need more facts before anything else. Together, we'll uncover the truth tonight.",
+            "ts": 1777814770699,
             "turn": 3
           }
         ],
         "whispers": [],
         "votes": [
           {
-            "voterId": 1,
-            "targetId": 4,
+            "voterId": 2,
+            "targetId": 8,
+            "reasoning": "Agent 8's behavior seems too convenient, aligning with the Peacemaker's shift.",
+            "ts": 1777814775111,
+            "turn": 3
+          },
+          {
+            "voterId": 5,
+            "targetId": 8,
             "reasoning": "(LLM output malformed; defaulted)",
-            "ts": 1777795958034,
+            "ts": 1777814782509,
             "turn": 3
           },
           {
             "voterId": 8,
-            "targetId": 4,
-            "reasoning": "Agent 4's eagerness now feels suspiciously convenient.",
-            "ts": 1777795969835,
+            "targetId": 2,
+            "reasoning": "Agent 2's enthusiasm for innocence is too convenient.",
+            "ts": 1777814787880,
             "turn": 3
           }
         ],
-        "eliminated": 4
+        "eliminated": 8
+      }
+    },
+    {
+      "turn": 4,
+      "night": {
+        "kill": {
+          "wolfId": 5,
+          "targetId": 2,
+          "reasoning": "I'm not sure but... his charm might hide something sinister. Better safe than sorry."
+        },
+        "investigation": null,
+        "covenMessages": []
+      },
+      "day": {
+        "speeches": [],
+        "whispers": [],
+        "votes": [],
+        "eliminated": null
       }
     }
   ],
-  "merkleRoot": "0x38324e122b9ce7f53a54980f931f1a0059e6d6002e1c418cb4d5eedf862937c5"
+  "merkleRoot": "0xe253d11349d6eb53f1b88f5906a421679b10bc98f1cb1e10f7d4fe74f0a2212a"
 }
