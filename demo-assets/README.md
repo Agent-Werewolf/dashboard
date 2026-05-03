@@ -37,9 +37,10 @@ work required.
 
 | File | Purpose | Used at |
 |------|---------|---------|
+| `hook-card.svg` / `.png` | Opening title with 8 agent dots | **0:00–0:20** |
 | `architecture-diagram.svg` / `.png` | 4-component infrastructure overview | 0:15–0:40 |
 | `end-card.svg` / `.png` | Closing branded card | 2:55–3:00 |
-| `Convert-SVG-to-PNG.html` | Browser-based SVG→PNG converter | Run once before editing |
+| `Convert-SVG-to-PNG.html` | Browser-based SVG→PNG converter (3 cards) | Run once before editing |
 | `VO-script-for-TTS.txt` | 6-beat voice-over text | Generate audio |
 | `Clip-B-axl-witness-terminal.txt` | Terminal output for AXL beat | 1:50–2:15 |
 | `Clip-D-verify-archive-terminal.txt` | Terminal output for verification beat | 2:15–2:40 |
