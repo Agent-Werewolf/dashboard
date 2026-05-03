@@ -336,19 +336,178 @@
     }
     function shortHex(s) { return s ? `${s.slice(0, 10)}…${s.slice(-8)}` : '—'; }
 
+    let wsConnected = false;
+    let wsAttempts = 0;
+    let replayStarted = false;
+
     function connect() {
       const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
       const ws = new WebSocket(`${proto}//${location.host}`);
-      ws.onopen = () => { $status.textContent = 'connected'; $status.className = 'status connected'; };
+      ws.onopen = () => {
+        wsConnected = true;
+        wsAttempts = 0;
+        $status.textContent = 'connected (live)';
+        $status.className = 'status connected';
+      };
       ws.onclose = () => {
-        $status.textContent = 'disconnected (reconnecting…)';
+        wsConnected = false;
+        wsAttempts += 1;
+        if (wsAttempts >= 3 && !replayStarted) {
+          // Fallback to replay mode after 3 failed attempts
+          $status.textContent = 'replay mode (sample game)';
+          $status.className = 'status connected';
+          startReplay();
+          return;
+        }
+        $status.textContent = `reconnecting (${wsAttempts})…`;
         $status.className = 'status disconnected';
         setTimeout(connect, 2000);
       };
       ws.onmessage = (msg) => {
         try { handleEvent(JSON.parse(msg.data)); } catch (e) { console.error(e); }
       };
+      ws.onerror = () => { /* triggers onclose */ };
     }
+
+    async function startReplay() {
+      replayStarted = true;
+      try {
+        const res = await fetch('sample-game.json');
+        if (!res.ok) throw new Error('no sample-game.json');
+        const archive = await res.json();
+        await playArchive(archive);
+      } catch (e) {
+        $status.textContent = 'no game to replay (' + e.message + ')';
+        $status.className = 'status disconnected';
+      }
+    }
+
+    async function playArchive(archive) {
+      const SPEED = 4; // 4x faster than real game
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms / SPEED));
+
+      // game_start
+      handleEvent({
+        kind: 'game_start',
+        payload: {
+          gameId: archive.gameId,
+          players: archive.players.map(p => ({ agentId: p.agentId, displayName: p.displayName, alive: true })),
+          rolesDistribution: { WEREWOLF: 2, VILLAGER: 5, SEER: 1 }
+        },
+        ts: archive.startTs
+      });
+      await sleep(500);
+
+      let alive = archive.players.map(p => p.agentId);
+
+      for (const turn of archive.turns) {
+        // NIGHT
+        handleEvent({
+          kind: 'phase_start',
+          payload: { phase: 'NIGHT', turn: turn.turn, alivePlayers: alive },
+          ts: Date.now()
+        });
+        await sleep(2000);
+
+        if (turn.night.kill) {
+          alive = alive.filter(id => id !== turn.night.kill.targetId);
+          const target = turn.night.kill.targetId;
+          const role = archive.players.find(p => p.agentId === target).finalRole;
+          handleEvent({
+            kind: 'night_kill',
+            payload: { turn: turn.turn, target, role },
+            ts: Date.now()
+          });
+          await sleep(1500);
+        }
+
+        // DAY_DISCUSSION
+        handleEvent({
+          kind: 'phase_start',
+          payload: { phase: 'DAY_DISCUSSION', turn: turn.turn, alivePlayers: alive },
+          ts: Date.now()
+        });
+        await sleep(800);
+
+        for (const speech of turn.day.speeches) {
+          handleEvent({
+            kind: 'speech',
+            payload: { speakerId: speech.speakerId, text: speech.text, turn: turn.turn },
+            ts: Date.now()
+          });
+          await sleep(2500);
+        }
+
+        // DAY_VOTE
+        handleEvent({
+          kind: 'phase_start',
+          payload: { phase: 'DAY_VOTE', turn: turn.turn, alivePlayers: alive },
+          ts: Date.now()
+        });
+        await sleep(800);
+
+        for (const vote of turn.day.votes) {
+          handleEvent({
+            kind: 'vote',
+            payload: { voterId: vote.voterId, targetId: vote.targetId, reasoning: vote.reasoning, turn: turn.turn },
+            ts: Date.now()
+          });
+          await sleep(800);
+        }
+
+        // ELIMINATION
+        if (turn.day.eliminated !== null) {
+          alive = alive.filter(id => id !== turn.day.eliminated);
+          const role = archive.players.find(p => p.agentId === turn.day.eliminated).finalRole;
+          const votes = {};
+          for (const v of turn.day.votes) {
+            const k = String(v.targetId);
+            votes[k] = (votes[k] || []);
+            votes[k].push(v.voterId);
+          }
+          handleEvent({
+            kind: 'elimination',
+            payload: { turn: turn.turn, eliminated: turn.day.eliminated, role, votes, alivePlayers: alive },
+            ts: Date.now()
+          });
+          await sleep(2000);
+        }
+      }
+
+      // GAME END
+      handleEvent({
+        kind: 'game_end',
+        payload: {
+          gameId: archive.gameId,
+          winner: archive.winner,
+          turnsPlayed: archive.turns.length,
+          finalRoles: Object.fromEntries(archive.players.map(p => [p.agentId, p.finalRole])),
+          players: archive.players.map(p => ({
+            agentId: p.agentId,
+            displayName: p.displayName,
+            role: p.finalRole,
+            survived: p.survived
+          }))
+        },
+        ts: archive.endTs
+      });
+      await sleep(2000);
+
+      // ARCHIVE COMMITTED — show real onchain proof
+      handleEvent({
+        kind: 'archive_committed',
+        payload: {
+          gameId: archive.gameId,
+          merkleRoot: archive.merkleRoot,
+          storageRoot: '0x' + '00'.repeat(32),
+          archiveTxHash: '0x87e2b48617cf01068949e0e3b743af4e15b78d0de673452d75a81cdcfcf1cfc6',
+          explorer: 'https://chainscan-galileo.0g.ai/tx/0x87e2b48617cf01068949e0e3b743af4e15b78d0de673452d75a81cdcfcf1cfc6',
+          note: 'Real game played by 8 LLM agents via 0G Compute Sealed Inference. Verified onchain (block 31260823).'
+        },
+        ts: Date.now()
+      });
+    }
+
     connect();
     renderInfo();
   </script>
