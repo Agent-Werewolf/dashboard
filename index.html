@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Werewolf — Live Spectator</title>
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --bg-2: #14141a;
+      --fg: #e6e6ec;
+      --fg-dim: #8b8b95;
+      --accent: #ff6b3d;
+      --wolf: #c83e3e;
+      --villager: #5b9bff;
+      --seer: #b86bff;
+      --dead: #4a4a52;
+      --border: #26262e;
+      --mono: ui-monospace, "JetBrains Mono", "SF Mono", Consolas, monospace;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes wolfGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200, 62, 62, 0); }
+      50% { box-shadow: 0 0 12px 2px rgba(200, 62, 62, 0.4); }
+    }
+    @keyframes phaseFlash {
+      0% { background: var(--accent); color: var(--bg); }
+      100% { background: var(--bg); color: var(--accent); }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font: 14px/1.5 system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+    }
+    header {
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    h1 span { color: var(--accent); }
+    .status {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--fg-dim);
+    }
+    .status.connected::before { content: "● "; color: #4caf50; }
+    .status.disconnected::before { content: "● "; color: var(--wolf); }
+    main {
+      display: grid;
+      grid-template-columns: 320px 1fr 320px;
+      gap: 24px;
+      padding: 24px 32px;
+      min-height: calc(100vh - 65px);
+    }
+    .panel {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-y: auto;
+      max-height: calc(100vh - 110px);
+    }
+    .panel h2 {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .player.dead { opacity: 0.4; }
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--fg-dim);
+    }
+    .player.alive .avatar { border-color: var(--accent); color: var(--accent); }
+    .player .name {
+      flex: 1;
+      font-size: 13px;
+    }
+    .player .role-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--bg);
+      color: var(--fg-dim);
+    }
+    .player .role-tag.WEREWOLF { background: var(--wolf); color: white; }
+    .player .role-tag.VILLAGER { background: var(--villager); color: white; }
+    .player .role-tag.SEER { background: var(--seer); color: white; }
+    .events {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .event {
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: var(--bg);
+      border-left: 3px solid var(--border);
+      font-size: 13px;
+      line-height: 1.5;
+      animation: slideIn 0.3s ease-out;
+    }
+    .event .meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--fg-dim);
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+    .event.speech .text { color: var(--fg); }
+    .event.speech .speaker { color: var(--accent); font-weight: 500; }
+    .event.phase {
+      background: linear-gradient(90deg, var(--bg-2), var(--bg));
+      border-left-color: var(--accent);
+      padding: 14px 16px;
+    }
+    .event.phase .meta { color: var(--accent); font-size: 13px; font-weight: 600; }
+    .player.wolf-revealed .avatar { animation: wolfGlow 2s ease-in-out infinite; }
+    .event.elimination { border-left-color: var(--wolf); }
+    .event.night_kill { border-left-color: var(--wolf); background: rgba(200, 62, 62, 0.06); }
+    .event.vote { border-left-color: var(--villager); font-size: 12px; }
+    .event.archive_committed { border-left-color: var(--seer); background: rgba(184, 107, 255, 0.06); }
+    .event.game_end { border-left-color: var(--accent); background: rgba(255, 107, 61, 0.1); padding: 16px; }
+    .event.game_end .winner { font-family: var(--mono); font-size: 16px; color: var(--accent); margin-top: 4px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .empty { color: var(--fg-dim); padding: 16px; text-align: center; font-style: italic; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agent <span>Werewolf</span></h1>
+    <div class="status disconnected" id="status">connecting…</div>
+  </header>
+  <main>
+    <aside class="panel">
+      <h2>Players</h2>
+      <div id="players"><div class="empty">waiting for game…</div></div>
+    </aside>
+    <section class="panel">
+      <h2>Live Feed</h2>
+      <div class="events" id="events"><div class="empty">waiting for events…</div></div>
+    </section>
+    <aside class="panel">
+      <h2>Game Info</h2>
+      <div id="info"><div class="empty">no active game</div></div>
+    </aside>
+  </main>
+  <script>
+    const $events = document.getElementById('events');
+    const $players = document.getElementById('players');
+    const $info = document.getElementById('info');
+    const $status = document.getElementById('status');
+    let players = [];
+    let alivePlayers = [];
+    let revealedRoles = false;
+    let finalRoles = {};
+    let currentPhase = '';
+    let currentTurn = 0;
+
+    function formatPersona(name) {
+      return name || '';
+    }
+
+    function renderPlayers() {
+      if (players.length === 0) {
+        $players.innerHTML = '<div class="empty">waiting for game…</div>';
+        return;
+      }
+      $players.innerHTML = players.map(p => {
+        const alive = alivePlayers.includes(p.agentId);
+        const role = revealedRoles ? finalRoles[p.agentId] : null;
+        return `
+          <div class="player ${alive ? 'alive' : 'dead'}">
+            <div class="avatar">${p.agentId}</div>
+            <div class="name">${p.displayName}</div>
+            ${role ? `<div class="role-tag ${role}">${role}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderInfo(extra) {
+      $info.innerHTML = `
+        <div style="font-family: var(--mono); font-size: 13px; line-height: 2;">
+          <div>Phase: <span style="color: var(--accent)">${currentPhase || '—'}</span></div>
+          <div>Turn:  <span style="color: var(--accent)">${currentTurn || '—'}</span></div>
+          <div>Alive: ${alivePlayers.length} / ${players.length}</div>
+          ${extra || ''}
+        </div>
+      `;
+    }
+
+    function clearEmpty() {
+      const empty = $events.querySelector('.empty');
+      if (empty) empty.remove();
+    }
+
+    function appendEvent(html, kind) {
+      clearEmpty();
+      const div = document.createElement('div');
+      div.className = `event ${kind}`;
+      div.innerHTML = html;
+      $events.appendChild(div);
+      div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    function handleEvent(ev) {
+      const ts = new Date(ev.ts).toLocaleTimeString();
+      const p = ev.payload;
+
+      switch (ev.kind) {
+        case 'game_start':
+          players = p.players;
+          alivePlayers = p.players.map(x => x.agentId);
+          revealedRoles = false;
+          finalRoles = {};
+          renderPlayers();
+          appendEvent(`<div class="meta">[${ts}] GAME START · ${p.players.length} agents · ${JSON.stringify(p.rolesDistribution)}</div>`, 'phase');
+          break;
+        case 'phase_start':
+          currentPhase = p.phase;
+          currentTurn = p.turn;
+          alivePlayers = p.alivePlayers || alivePlayers;
+          renderPlayers();
+          renderInfo();
+          appendEvent(`<div class="meta">[${ts}] T${p.turn} · ${p.phase}</div>`, 'phase');
+          break;
+        case 'speech':
+          const speaker = players.find(x => x.agentId === p.speakerId);
+          appendEvent(`
+            <div class="meta">[${ts}] T${p.turn} speech</div>
+            <div><span class="speaker">${speaker?.displayName ?? `agent ${p.speakerId}`}:</span> <span class="text">${escapeHtml(p.text)}</span></div>
+          `, 'speech');
+          break;
+        case 'vote':
+          const voter = players.find(x => x.agentId === p.voterId);
+          const target = players.find(x => x.agentId === p.targetId);
+          appendEvent(`
+            <div class="meta">[${ts}] T${p.turn} vote</div>
+            <div>${voter?.displayName} → ${target?.displayName} <span style="color:var(--fg-dim)">— "${escapeHtml(p.reasoning)}"</span></div>
+          `, 'vote');
+          break;
+        case 'night_kill':
+          const killed = players.find(x => x.agentId === p.target);
+          alivePlayers = alivePlayers.filter(id => id !== p.target);
+          renderPlayers();
+          appendEvent(`<div class="meta">[${ts}] T${p.turn} NIGHT KILL</div>
+            <div>${killed?.displayName} was killed by wolves <span style="color:var(--fg-dim)">(was ${p.role})</span></div>`, 'night_kill');
+          break;
+        case 'elimination':
+          if (p.eliminated) {
+            const elim = players.find(x => x.agentId === p.eliminated);
+            alivePlayers = p.alivePlayers || alivePlayers.filter(id => id !== p.eliminated);
+            renderPlayers();
+            appendEvent(`<div class="meta">[${ts}] T${p.turn} ELIMINATION</div>
+              <div>${elim?.displayName} was voted out <span style="color:var(--fg-dim)">(was ${p.role})</span></div>`, 'elimination');
+          } else {
+            appendEvent(`<div class="meta">[${ts}] T${p.turn} no elimination (no votes)</div>`, 'elimination');
+          }
+          break;
+        case 'game_end':
+          revealedRoles = true;
+          finalRoles = p.finalRoles;
+          alivePlayers = p.players.filter(x => x.survived).map(x => x.agentId);
+          renderPlayers();
+          appendEvent(`
+            <div class="meta">[${ts}] GAME END</div>
+            <div class="winner">${p.winner} WIN</div>
+            <div style="margin-top: 8px; color: var(--fg-dim); font-size: 12px;">${p.turnsPlayed} turns played</div>
+          `, 'game_end');
+          break;
+        case 'archive_committed':
+          let html = `<div class="meta">[${ts}] ARCHIVE COMMITTED</div>
+            <div style="font-family: var(--mono); font-size: 11px;">Merkle: ${shortHex(p.merkleRoot)}</div>
+            <div style="font-family: var(--mono); font-size: 11px;">Storage: ${shortHex(p.storageRoot)}</div>`;
+          if (p.explorer) html += `<div style="margin-top:6px"><a href="${p.explorer}" target="_blank">View on Chainscan →</a></div>`;
+          if (p.note) html += `<div style="color:var(--fg-dim); font-size:11px; margin-top:4px;">${p.note}</div>`;
+          appendEvent(html, 'archive_committed');
+          renderInfo(`<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">
+            <div style="font-size: 11px; color: var(--fg-dim);">Merkle Root</div>
+            <div style="font-family: var(--mono); font-size: 10px; word-break: break-all;">${p.merkleRoot}</div>
+            ${p.explorer ? `<div style="margin-top: 8px;"><a href="${p.explorer}" target="_blank" style="font-size: 12px;">View tx on Chainscan</a></div>` : ''}
+          </div>`);
+          break;
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+    function shortHex(s) { return s ? `${s.slice(0, 10)}…${s.slice(-8)}` : '—'; }
+
+    function connect() {
+      const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const ws = new WebSocket(`${proto}//${location.host}`);
+      ws.onopen = () => { $status.textContent = 'connected'; $status.className = 'status connected'; };
+      ws.onclose = () => {
+        $status.textContent = 'disconnected (reconnecting…)';
+        $status.className = 'status disconnected';
+        setTimeout(connect, 2000);
+      };
+      ws.onmessage = (msg) => {
+        try { handleEvent(JSON.parse(msg.data)); } catch (e) { console.error(e); }
+      };
+    }
+    connect();
+    renderInfo();
+  </script>
+</body>
+</html>
